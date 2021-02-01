@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Find&Replace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css"/>
+</head>
+<body>
+<div class="container">
+    <h1>Find And Replace App</h1>
+    <hr>
+    <form action="/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="find" placeholder="Find Any Word">
+        <input type="text" name="replace" placeholder="Replace That Word">
+        <input type="file" name="myfile">
+        <input type="submit" value="Find & Replace">
+    </form>
+    <div class="row">
+        <div class="one-third column">
+            <h3>Original Text</h3>
+            {% for model in models %}
+            <p>{{ model.id }}. {{ model.find }}</p>
+            {% endfor %}
+        </div>
+        <div class="one-third column">
+            <h3>Updated Text</h3>
+            {% for model in models %}
+            <p>{{ model.replace }}</p>
+            {% endfor %}
+        </div>
+        <div class="one-third column">
+            <h3>Download File</h3>
+            {% for model in models %}
+                <p><a href="{{ model.path }}"><b>View</b></a> | <a href="{{ model.path }}" download>Download</a></p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</body>
+</html>
